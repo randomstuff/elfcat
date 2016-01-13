@@ -39,7 +39,7 @@ THE SOFTWARE.
 
 // Genetic dump:
 
-static int dump_zero(loff_t size)
+static int dump_zero(off_t size)
 {
   size_t buffer_size = 64*1024;
   void* buffer = calloc(1, buffer_size);
@@ -57,7 +57,7 @@ static int dump_zero(loff_t size)
   return EXIT_SUCCESS;
 }
 
-static int dump_data(int fd, loff_t offset, loff_t size)
+static int dump_data(int fd, off_t offset, off_t size)
 {
   size_t buffer_size = 64*1024;
   void* buffer = malloc(buffer_size);
