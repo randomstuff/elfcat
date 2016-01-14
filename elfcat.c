@@ -259,6 +259,7 @@ static int show_version(void)
   fprintf(stderr, "elfcat " ELFCAT_VERSION "\n"
     "Copyright 2015-2016 Gabriel Corona\n"
     "MIT License\n");
+  return EXIT_SUCCESS;
 }
 
 int main(int argc, char** argv)
