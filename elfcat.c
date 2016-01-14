@@ -36,6 +36,8 @@ THE SOFTWARE.
 #include <libelf.h>
 #include <gelf.h>
 
+#define ELFCAT_VERSION "0.0"
+
 // Genetic dump:
 
 static int dump_zero(off_t size)
@@ -181,6 +183,7 @@ enum cli_option {
   CLI_OPTION_SECTION_NAME = 501,
   CLI_OPTION_SECTION_INDEX = 502,
   CLI_OPTION_PROGRAM_INDEX = 503,
+  CLI_OPTION_VERSION = 504,
 };
 
 struct cli_action {
@@ -244,10 +247,18 @@ static int show_help()
 {
   fprintf(stderr, "elfcat [elf-files] [options]\n"
    "  --help                 This help\n"
+   "  --version              Version\n"
    "  --section-name .text   Dump a section with a given name\n"
    "  --section-index 3      Dump a section with a given index\n"
    "  --program-index 3      Dump a program header with a given index\n");
   return EXIT_SUCCESS;
+}
+
+static int show_version(void)
+{
+  fprintf(stderr, "elfcat " ELFCAT_VERSION "\n"
+    "Copyright 2015-2016 Gabriel Corona\n"
+    "MIT License\n");
 }
 
 int main(int argc, char** argv)
@@ -266,6 +277,7 @@ int main(int argc, char** argv)
   while (1) {
     static struct option long_options[] = {
       {"help", no_argument, NULL, CLI_OPTION_HELP},
+      {"version", no_argument, NULL, CLI_OPTION_VERSION},
       {"section-name", required_argument, NULL, CLI_OPTION_SECTION_NAME},
       {"section-index", required_argument, NULL, CLI_OPTION_SECTION_INDEX},
       {"program-index", required_argument, NULL, CLI_OPTION_PROGRAM_INDEX},
@@ -280,6 +292,8 @@ int main(int argc, char** argv)
       break;
     case CLI_OPTION_HELP:
       return show_help();
+    case CLI_OPTION_VERSION:
+      return show_version();
 
     case CLI_OPTION_SECTION_NAME:
     case CLI_OPTION_SECTION_INDEX:
