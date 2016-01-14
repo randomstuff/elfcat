@@ -21,8 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#define _FILE_OFFSET_BITS 64
-
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
