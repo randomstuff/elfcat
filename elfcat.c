@@ -243,7 +243,7 @@ on_failure:
   return res;
 }
 
-static int show_help()
+static int show_help(void)
 {
   fprintf(stderr, "elfcat [elf-files] [options]\n"
    "  --help                 This help\n"
