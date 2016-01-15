@@ -1,90 +1,73 @@
-.TH ELFCAT 1
-
-.SH NAME
-
-elfcat - dump sections, segments of an ELF file
-
-.SH SYNOPSIS
-
-.B elfcat
-.B --section-name
-.I .text
-.B --section-index
-.I 1
-.B --program-index
-.I 1
-.IR elffile ...
-
-.SH DESCRIPTION
-
-.PP
-.B elfcat
+.\" Copyright (C) 2016 Gabriel Corona. MIT License.
+.Dd January 16, 2016
+.Dt ELFCAT 1
+.Os
+.Sh NAME
+.Nm elfcat
+.Nd dump sections, segments of an ELF file
+.Sh SYNOPSIS
+.Nm
+.Op Fl -help
+.Op Fl -version
+.Op Fl -section-name Ar name
+.Op Fl -section-index Ar index
+.Op Fl -program-index Ar
+.Op Ar elf-names
+.Sh DESCRIPTION
+.Nm
 dumps requested parts (sections and segments) of an ELF file
 (executable, shared object, \.o file) to stdout.
-
-.PP
+.Pp
 Dumping sections can be achieved with
-.B objcopy --dump-section
+.Qq objcopy --dump-section
 but this tools relies on BFD which abstracts
 all executable files and is not able to see some ELF sections.
 Morever it cannot handle program header table entries.
-
-.SH OPTIONS
-
-.TP
-.BR --help
+.Pp
+Supported options are:
+.Bl -tag -width "--section-index index" -compact
+.It Fl -help
 Help
-
-.TP
-.BR --version
+.It Fl -version
 Version information
-
-.TP
-.BR --section-name " " \fI.text\fR
-Dump a section with a given name.
-
-.TP
-.BR --section-index " " \fI1\fR
-Dump a section found by its index in the section table.
-
-.TP
-.BR --program-index " " \fI1\fR
+.It Fl -section-name Ar name
+Dump a section with a given
+.Ar name .
+.It Fl -section-index Ar index
+Dump a section found by its
+.Ar index
+in the section table.
+.It Fl -program-index
 Dump a part of the ELF file described by a program header found by its
 index.
-
-.SH EXIT STATUS
-
-.PP
+.El
+.Sh EXIT STATUS
 If everything goes well,
-.B elfcat
-exit with 0.
-If anything bad happens, it exits with a non 0.
-
-.SH EXAMPLES
-
-.TP
-.B elfcat --section-name .dynstr /bin/bash | xargs -0 -n1 echo
+.Nm
+exits with 0.
+If anything bad happens, it exits with a nonzero value.
+.Sh EXAMPLES
+.Bd -literal -offset indent
+elfcat --section-name .dynstr /bin/sh | xargs -0 -n1 echo
+.Ed
+.Pp
 Print the content of the dynamic string table. Each entry is
-terminated by a NUL byte in the FILE so we use
-.B xargs -0
+terminated by a
+.Va NUL
+byte in the
+.Vt FILE
+so we use
+.Qq xargs -0
 in order to display it in a more human-friendly form.
-
-.SH SEE ALSO
-
-Git repo at: <https://github.com/randomstuff/elfcat/>
-
-.SH STANDARDS
-
-.TP
-\fISystem V Application Binary Interface\fR, Edition 4.1
-<http://www.sco.com/developers/devspecs/gabi41.pdf>
-
-.SH AUTHORS
-
-.PP
-Written by Gabriel Corona and Kamil Rytarowski.
-
-.SH AUTHORS
-
-.PP
+.Sh SEE ALSO
+.Lk https://github.com/randomstuff/elfcat/ "Git repo"
+.Sh STANDARDS
+.Lk http://www.sco.com/developers/devspecs/gabi41.pdf "System V Application Binary Interface, Edition 4.1"
+.Sh AUTHORS
+Written by
+.An -nosplit
+.An Gabriel Corona
+and
+.An Kamil Rytarowski .
+.Pp
 Copyright (C) 2016 Gabriel Corona. MIT License.

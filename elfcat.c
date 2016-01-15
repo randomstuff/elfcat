@@ -245,7 +245,7 @@ on_failure:
 
 static int show_help(void)
 {
-  fprintf(stderr, "elfcat [elf-files] [options]\n"
+  fprintf(stderr, "elfcat [options] [elf-files]\n"
    "  --help                 This help\n"
    "  --version              Version\n"
    "  --section-name .text   Dump a section with a given name\n"
