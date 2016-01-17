@@ -1,9 +1,12 @@
 CC=c99
+PKG_CONFIG=pkg-config
+INSTALL=install
+
 CFLAGS=-O3 -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
 LDFLAGS=
 
-CFLAGS+=`pkg-config --silence-errors --cflags libelf || echo -lelf`
-LDFLAGS+=`pkg-config --silence-errors --libs libelf || true`
+CFLAGS+=`$(PKG_CONFIG) --silence-errors --cflags libelf || echo -lelf`
+LDFLAGS+=`$(PKG_CONFIG) --silence-errors --libs libelf || true`
 
 PREFIX?=/usr/local
 
@@ -24,7 +27,7 @@ elfcat: elfcat.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -o elfcat elfcat.c
 
 install: elfcat elfcat.1
-	install -d $(DESTDIR)$(PREFIX)/bin
-	install -m $(BINMODE) elfcat $(DESTDIR)$(PREFIX)/bin
-	install -d $(DESTDIR)$(PREFIX)/$(MANDIR)/man1
-	install -m $(MANMODE) elfcat.1 $(DESTDIR)$(PREFIX)/$(MANDIR)/man1
+	$(INSTALL) -d $(DESTDIR)$(PREFIX)/bin
+	$(INSTALL) -m $(BINMODE) elfcat $(DESTDIR)$(PREFIX)/bin
+	$(INSTALL) -d $(DESTDIR)$(PREFIX)/$(MANDIR)/man1
+	$(INSTALL) -m $(MANMODE) elfcat.1 $(DESTDIR)$(PREFIX)/$(MANDIR)/man1
