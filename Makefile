@@ -14,7 +14,7 @@ MANMODE?=644
 RM=rm -rf
 
 .DEFAULT: all
-.PHONY: clean all
+.PHONY: clean all install
 
 all: elfcat
 clean:
