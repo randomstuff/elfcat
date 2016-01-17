@@ -1,6 +1,9 @@
 CC=c99
-CFLAGS=-O3 -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE `pkg-config --cflags libelf`
-LDFLAGS=`pkg-config --libs libelf`
+CFLAGS=-O3 -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE
+LDFLAGS=
+
+CFLAGS+=`pkg-config --silence-errors --cflags libelf || echo -lelf`
+LDFLAGS+=`pkg-config --silence-errors --libs libelf || true`
 
 PREFIX?=/usr/local
 
