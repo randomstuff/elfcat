@@ -21,6 +21,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,8 +39,6 @@ THE SOFTWARE.
 
 #include <libelf.h>
 #include <gelf.h>
-
-#define ELFCAT_VERSION "0.0"
 
 // Genetic dump:
 
@@ -256,7 +258,7 @@ static int show_help(void)
 
 static int show_version(void)
 {
-  fprintf(stderr, "elfcat " ELFCAT_VERSION "\n"
+  fprintf(stderr, PACKAGE_STRING "\n"
     "Copyright 2015-2016 Gabriel Corona\n"
     "MIT License\n");
   return EXIT_SUCCESS;
