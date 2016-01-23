@@ -13,7 +13,7 @@ elfcat ./foo --program-index
 ### Manual
 
 ~~~sh
-automake --add-missing && ./configure && make
+autoreconf -fiv && ./configure && make
 ~~~
 
 ### NetBSD
