@@ -48,7 +48,7 @@ exits with 0.
 If anything bad happens, it exits with a nonzero value.
 .Sh EXAMPLES
 .Bd -literal -offset indent
-elfcat --section-name .dynstr /bin/sh | xargs -0 -n1 echo
+elfcat --section-name .dynstr /bin/sh | tr '\\000' '\\n'
 .Ed
 .Pp
 Print the content of the dynamic string table. Each entry is
@@ -57,7 +57,7 @@ terminated by a
 byte in the
 .Vt FILE
 so we use
-.Qq xargs -0
+.Qq tr
 in order to display it in a more human-friendly form.
 .Sh SEE ALSO
 .Lk https://github.com/randomstuff/elfcat/ "Git repo"
